@@ -5,25 +5,16 @@ from sklearn.grid_search import RandomizedSearchCV
 # prepare a uniform distribution to sample for the alpha parameter
 data = np.genfromtxt('data.csv',skip_header=1,delimiter=',')
 
-
-
-
-
-
 print(__doc__)
 
 # Loading the Digits dataset
-#digits = datasets.load_digits()
+
 digits = data
 # To apply an classifier on this data, we need to flatten the image, to
 # turn the data in a (samples, feature) matrix:
-#n_samples = len(data)
 y = digits [:,[11]]
-#X = digits.reshape(n_samples, -10)
 X = digits [:,[1,2,3,4,5,6,7,8,9,10]]
 y = y [:,0]
-
-
 
 param_grid = {'alpha': sp_rand()}
 # create and fit a ridge regression model, testing random alpha values
