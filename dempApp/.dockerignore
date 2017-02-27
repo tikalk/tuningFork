@@ -1,0 +1,6 @@
+src
+target/*classes
+target/maven*
+target/surefire*
+mvn*
+pom.xml
