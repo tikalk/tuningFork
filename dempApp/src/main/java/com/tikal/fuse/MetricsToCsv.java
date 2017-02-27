@@ -41,6 +41,8 @@ public class MetricsToCsv {
     /**
      *
      * -XX:+UseSerialGC (1), -XX:+USeParNewGC (2), –XX:+UseG1GC (3)
+     *
+     * format of file is: cores, garbageCollectorType, throughput, latency
      * @throws FileNotFoundException
      */
     @Scheduled(fixedDelay=10000)
@@ -58,18 +60,18 @@ public class MetricsToCsv {
             garbageCollectorType = 1;
         }
 
-
         String dateTime = datetimeFormater.format(LocalDateTime.now());
         CsvWriterSettings csvWriterSettings = new CsvWriterSettings();
         csvWriterSettings.setEscapeUnquotedValues(true);
         csvWriterSettings.setQuoteAllFields(true);
-        csvWriterSettings.setHeaderWritingEnabled(false);
+        csvWriterSettings.setHeaderWritingEnabled(true);
         FileOutputStream out = new FileOutputStream(new File(String.format("%s/metircs-%s.csv",csvDir,dateTime)));
-        List<String> headers = Arrays.asList("throughput","latency");
+        List<String> headers = Arrays.asList("cores", "garbageCollectorType", "throughput", "latency");
         csvWriterSettings.setHeaders(headers.toArray(new String[headers.size()]));
         CsvWriter writer = new CsvWriter(out, csvWriterSettings);
         Map<String, Object> csvRow = new HashMap<>();
 
+        csvRow.put("cores",Runtime.getRuntime().availableProcessors());
         csvRow.put("garbageCollectorType",garbageCollectorType);
         csvRow.put("throughput",minimum + (long)(Math.random() * maximum));
         csvRow.put("latency",minimum + (long)(Math.random() * maximum));
