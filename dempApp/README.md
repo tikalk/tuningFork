@@ -16,5 +16,5 @@ If you want to create a specific version:
 To run tuningForkDemoApp:
 
 ```export JAVA_OPTS=<your Java Opts>```
-```export VERSION=<latest or your version>``` 
+```export VERSION=<latest or your version> (latest)``` 
 ```docker-compose up -d```
