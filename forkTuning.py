@@ -3,7 +3,7 @@ from scipy.stats import uniform as sp_rand
 from sklearn.linear_model import Ridge
 from sklearn.grid_search import RandomizedSearchCV
 # prepare a uniform distribution to sample for the alpha parameter
-data = np.genfromtxt('data2.csv',skip_header=1,delimiter=',')
+data = np.genfromtxt('data.csv',skip_header=1,delimiter=',')
 
 
 
