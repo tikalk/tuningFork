@@ -42,7 +42,7 @@ public class MetricsToCsv {
      * -XX:+UseSerialGC (1), -XX:+USeParNewGC (2), –XX:+UseG1GC (3)
      * <p>
      * format of file is: cores, garbageCollectorType, throughput, latency
-     * app_id,i_cpu,i_ram,i_xx,i_th,o_cpu,o_ram,o_syload,o_thpic,o_gc,o_thput,o_lt
+     *
      *
      * @throws FileNotFoundException
      */
@@ -63,7 +63,7 @@ public class MetricsToCsv {
         csvWriterSettings.setHeaderWritingEnabled(true);
 
         FileOutputStream out = new FileOutputStream(writeFile);
-        List<String> headers = Arrays.asList("cores", "garbageCollectorType", "throughput", "latency");
+        List<String> headers = Arrays.asList("app_id","i_cpu","i_ram","i_xx","i_th","o_cpu","o_ram","o_syload","o_thpic","o_gc","o_throughput","o_latency");
         csvWriterSettings.setHeaders(headers.toArray(new String[headers.size()]));
         CsvWriter writer = new CsvWriter(out, csvWriterSettings);
         Map<String, Object> csvRow = new HashMap<>();
@@ -102,11 +102,19 @@ public class MetricsToCsv {
             garbageCollectorType = 1;
         }
 
+        csvRow.put("app_id","1");
+        csvRow.put("i_cpu", Runtime.getRuntime().availableProcessors());
+        csvRow.put("i_ram",2000);
+        csvRow.put("i_xx",33);
+        csvRow.put("i_th",23);
+        csvRow.put("o_cpu",3);
+        csvRow.put("o_ram",2000);
+        csvRow.put("o_syload",3);
+        csvRow.put("o_thpic",4);
+        csvRow.put("o_gc",garbageCollectorType);
+        csvRow.put("o_throughput",minimum + (long) (Math.random() * maximum));
+        csvRow.put("o_latency",minimum + (long) (Math.random() * maximum));
 
-        csvRow.put("cores", Runtime.getRuntime().availableProcessors());
-        csvRow.put("garbageCollectorType", garbageCollectorType);
-        csvRow.put("throughput", minimum + (long) (Math.random() * maximum));
-        csvRow.put("latency", minimum + (long) (Math.random() * maximum));
         writer.writeRow(csvRow);
         writer.close();
 
