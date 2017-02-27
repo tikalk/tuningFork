@@ -1,2 +1,2 @@
-cpu;ram(GB);XX(MB);threads;FIELD5
-1;2;2048;3;
+cpu,ram(GB),XX(MB),threads,FIELD5
+1,2,2048,3,
