@@ -4,6 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Sidebar from './components/sidebar/SideBar';
 import Table1 from './components/table1/table1';
 import AppBar from 'material-ui/AppBar';
+import Chart1 from '.components/chart1/chart1';
 
 class App extends Component {
     render() {
@@ -18,7 +19,7 @@ class App extends Component {
                     <p className="App-intro">
                         To get started
                     </p>
-
+                    <Chart1 />
                     <Table1/>
 
                 </div>
