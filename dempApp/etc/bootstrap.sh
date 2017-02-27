@@ -3,4 +3,4 @@
 pwd=`pwd`
 echo $pwd
 
-java $JAVA_OPTS -jar ./tuningForkDemoApp*.jar --Dcsv.dir=$CVS_DIR
+java $JAVA_OPTS -jar ./tuningForkDemoApp*.jar --csv.dir=$CVS_DIR
