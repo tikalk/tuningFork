@@ -2,7 +2,7 @@
 
 Run demo app:
 
-```docker-compose run -d demoApp```
+```docker-compose -f dempApp/docker-compose.yml run -d```
 
 Run tuningFork
 
