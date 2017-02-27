@@ -1,0 +1,14 @@
+version: "2"
+services:
+  tuningForkDemoApp:
+    container_name: tuningForkDemoApp
+    hostname: tuningForkDemoApp
+    image: tuningfork/demoapp:$VERSION
+    environment:
+      - JAVA_OPTS=$JAVA_OPTS
+      - CVS_DIR=/opt/demo/output
+    ports:
+      - 9000:9000
+      - 9001:9001
+    volumes:
+      - ./demo/output:/opt/demo/output
