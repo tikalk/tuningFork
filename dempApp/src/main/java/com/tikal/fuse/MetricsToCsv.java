@@ -1,10 +1,5 @@
 package com.tikal.fuse;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
-import com.fasterxml.jackson.dataformat.csv.CsvMapper;
-import com.fasterxml.jackson.dataformat.csv.CsvSchema;
-import com.fasterxml.jackson.dataformat.csv.impl.CsvEncoder;
 import com.univocity.parsers.csv.CsvWriter;
 import com.univocity.parsers.csv.CsvWriterSettings;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +11,14 @@ import org.springframework.stereotype.Component;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.text.DateFormat;
-import java.time.LocalDate;
+import java.lang.management.ManagementFactory;
+import java.lang.management.RuntimeMXBean;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Chaim on 27/02/2017.
@@ -40,8 +38,27 @@ public class MetricsToCsv {
 
     public static final DateTimeFormatter datetimeFormater = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
+    /**
+     *
+     * -XX:+UseSerialGC (1), -XX:+USeParNewGC (2), –XX:+UseG1GC (3)
+     * @throws FileNotFoundException
+     */
     @Scheduled(fixedDelay=10000)
     public void saveCsv() throws FileNotFoundException {
+        RuntimeMXBean runtimeMxBean = ManagementFactory.getRuntimeMXBean();
+        List<String> arguments = runtimeMxBean.getInputArguments();
+        int garbageCollectorType = 0;
+        if (arguments.stream().filter(s -> s.equals("-XX:+UseSerialGC")).count()==1){
+            garbageCollectorType = 1;
+        }
+        else if (arguments.stream().filter(s -> s.equals("-XX:+USeParNewGC")).count()==1){
+            garbageCollectorType = 1;
+        }
+        else if (arguments.stream().filter(s -> s.equals("-XX:+UseG1GC")).count()==1){
+            garbageCollectorType = 1;
+        }
+
+
         String dateTime = datetimeFormater.format(LocalDateTime.now());
         CsvWriterSettings csvWriterSettings = new CsvWriterSettings();
         csvWriterSettings.setEscapeUnquotedValues(true);
@@ -52,14 +69,16 @@ public class MetricsToCsv {
         csvWriterSettings.setHeaders(headers.toArray(new String[headers.size()]));
         CsvWriter writer = new CsvWriter(out, csvWriterSettings);
         Map<String, Object> csvRow = new HashMap<>();
+
+        csvRow.put("garbageCollectorType",garbageCollectorType);
         csvRow.put("throughput",minimum + (long)(Math.random() * maximum));
         csvRow.put("latency",minimum + (long)(Math.random() * maximum));
         writer.writeRow(csvRow);
         writer.close();
 
-        publicMetrics.forEach(publicMetrics1 -> {
-            System.out.println(publicMetrics1.toString());
-        });
+//        publicMetrics.forEach(publicMetrics1 -> {
+//            System.out.println(publicMetrics1.toString());
+//        });
 
     }
 
