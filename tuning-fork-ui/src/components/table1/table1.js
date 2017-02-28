@@ -4,52 +4,65 @@
 import React from 'react';
 import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn}
     from 'material-ui/Table';
-import TextField from 'material-ui/TextField';
-import Toggle from 'material-ui/Toggle';
-
-const styles = {
-    propContainer: {
-        width: 200,
-        overflow: 'hidden',
-        margin: '20px auto 0',
-    },
-    propToggleHeader: {
-        margin: '20px auto 10px',
-    },
-};
-
 const tableData = [
-    {
-        name: 'John Smith',
-        status: 'Employed',
-        selected: true,
-    },
-    {
-        name: 'Randal White',
-        status: 'Unemployed',
-    },
-    {
-        name: 'Stephanie Sanders',
-        status: 'Employed',
-        selected: true,
-    },
-    {
-        name: 'Steve Brown',
-        status: 'Employed',
-    },
-    {
-        name: 'Joyce Whitten',
-        status: 'Employed',
-    },
-    {
-        name: 'Samuel Roberts',
-        status: 'Employed',
-    },
-    {
-        name: 'Adam Moore',
-        status: 'Employed',
-    },
-];
+                    {
+                      "app_id": 1,
+                      "i_cpu": 8,
+                      "i_ram": 8,
+                      "i_xx": 2048,
+                      "i_th": 3,
+                      "o_cpu": 5,
+                      "o_ram": 5,
+                      "o_syload": 3,
+                      "o_thpic": 4,
+                      "o_gc": 5,
+                      "o_thput": 240,
+                      "o_lt": 0.4
+                    },
+                    {
+                      "app_id": 2,
+                      "i_cpu": 8,
+                      "i_ram": 8,
+                      "i_xx": 2048,
+                      "i_th": 3,
+                      "o_cpu": 5,
+                      "o_ram": 5,
+                      "o_syload": 3,
+                      "o_thpic": 4,
+                      "o_gc": 5,
+                      "o_thput": 220,
+                      "o_lt": 0.3
+                    },
+                    {
+                      "app_id": 3,
+                      "i_cpu": 8,
+                      "i_ram": 8,
+                      "i_xx": 2048,
+                      "i_th": 3,
+                      "o_cpu": 5,
+                      "o_ram": 5,
+                      "o_syload": 3,
+                      "o_thpic": 4,
+                      "o_gc": 5,
+                      "o_thput": 230,
+                      "o_lt": 0.1
+                    },
+                    {
+                      "app_id": 4,
+                      "i_cpu": 8,
+                      "i_ram": 8,
+                      "i_xx": 2048,
+                      "i_th": 3,
+                      "o_cpu": 5,
+                      "o_ram": 5,
+                      "o_syload": 3,
+                      "o_thpic": 4,
+                      "o_gc": 5,
+                      "o_thput": 230,
+                      "o_lt": 0.1
+                    }
+                  ];
+
 
 export default class Table1 extends React.Component {
 
@@ -96,14 +109,14 @@ export default class Table1 extends React.Component {
                         enableSelectAll={this.state.enableSelectAll}
                     >
                         <TableRow>
-                            <TableHeaderColumn colSpan="3" tooltip="Super Header" style={{textAlign: 'center'}}>
-                                Super Header
-                            </TableHeaderColumn>
-                        </TableRow>
-                        <TableRow>
-                            <TableHeaderColumn tooltip="The ID">ID</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="The Name">Name</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="The Status">Status</TableHeaderColumn>
+                            <TableHeaderColumn tooltip="ID">ID</TableHeaderColumn>
+                            <TableHeaderColumn tooltip="Input CPU">Input CPU</TableHeaderColumn>
+                            <TableHeaderColumn tooltip="Input RAM">Input RAM</TableHeaderColumn>
+                            <TableHeaderColumn tooltip="Input Throughput">Threads</TableHeaderColumn>
+                            <TableHeaderColumn tooltip="Output CPU">Output CPU</TableHeaderColumn>
+                            <TableHeaderColumn tooltip="Output RAM">Output RAM</TableHeaderColumn>
+                            <TableHeaderColumn tooltip="System Load">System Load</TableHeaderColumn>
+                            <TableHeaderColumn tooltip="Out Throughput">Out Throughput</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
                     <TableBody
@@ -114,9 +127,14 @@ export default class Table1 extends React.Component {
                     >
                         {tableData.map( (row, index) => (
                             <TableRow key={index} selected={row.selected}>
-                                <TableRowColumn>{index}</TableRowColumn>
-                                <TableRowColumn>{row.name}</TableRowColumn>
-                                <TableRowColumn>{row.status}</TableRowColumn>
+                                <TableRowColumn>{row.app_id}</TableRowColumn>
+                                <TableRowColumn>{row.i_cpu}</TableRowColumn>
+                                <TableRowColumn>{row.i_ram}</TableRowColumn>
+                                <TableRowColumn>{row.i_th}</TableRowColumn>
+                                <TableRowColumn>{row.o_cpu}</TableRowColumn>
+                                <TableRowColumn>{row.o_ram}</TableRowColumn>
+                                <TableRowColumn>{row.o_syload}</TableRowColumn>
+                                <TableRowColumn>{row.o_thput}</TableRowColumn>
                             </TableRow>
                         ))}
                     </TableBody>
@@ -124,82 +142,18 @@ export default class Table1 extends React.Component {
                         adjustForCheckbox={this.state.showCheckboxes}
                     >
                         <TableRow>
-                            <TableRowColumn>ID</TableRowColumn>
-                            <TableRowColumn>Name</TableRowColumn>
-                            <TableRowColumn>Status</TableRowColumn>
-                        </TableRow>
-                        <TableRow>
-                            <TableRowColumn colSpan="3" style={{textAlign: 'center'}}>
-                                Super Footer
-                            </TableRowColumn>
+                            <TableRowColumn tooltip="ID">ID</TableRowColumn>
+                            <TableRowColumn tooltip="Input CPU">Input CPU</TableRowColumn>
+                            <TableRowColumn tooltip="Input RAM">Input RAM</TableRowColumn>
+                            <TableRowColumn tooltip="Input Throughput">Threads</TableRowColumn>
+                            <TableRowColumn tooltip="Output CPU">Output CPU</TableRowColumn>
+                            <TableRowColumn tooltip="Output RAM">Output RAM</TableRowColumn>
+                            <TableRowColumn tooltip="System Load">System Load</TableRowColumn>
+                            <TableRowColumn tooltip="Out Throughput">Out Throughput</TableRowColumn>
                         </TableRow>
                     </TableFooter>
                 </Table>
 
-                <div style={styles.propContainer}>
-                    <h3>Table Properties</h3>
-                    <TextField
-                        floatingLabelText="Table Body Height"
-                        defaultValue={this.state.height}
-                        onChange={this.handleChange}
-                    />
-                    <Toggle
-                        name="fixedHeader"
-                        label="Fixed Header"
-                        onToggle={this.handleToggle}
-                        defaultToggled={this.state.fixedHeader}
-                    />
-                    <Toggle
-                        name="fixedFooter"
-                        label="Fixed Footer"
-                        onToggle={this.handleToggle}
-                        defaultToggled={this.state.fixedFooter}
-                    />
-                    <Toggle
-                        name="selectable"
-                        label="Selectable"
-                        onToggle={this.handleToggle}
-                        defaultToggled={this.state.selectable}
-                    />
-                    <Toggle
-                        name="multiSelectable"
-                        label="Multi-Selectable"
-                        onToggle={this.handleToggle}
-                        defaultToggled={this.state.multiSelectable}
-                    />
-                    <Toggle
-                        name="enableSelectAll"
-                        label="Enable Select All"
-                        onToggle={this.handleToggle}
-                        defaultToggled={this.state.enableSelectAll}
-                    />
-                    <h3 style={styles.propToggleHeader}>TableBody Properties</h3>
-                    <Toggle
-                        name="deselectOnClickaway"
-                        label="Deselect On Clickaway"
-                        onToggle={this.handleToggle}
-                        defaultToggled={this.state.deselectOnClickaway}
-                    />
-                    <Toggle
-                        name="stripedRows"
-                        label="Stripe Rows"
-                        onToggle={this.handleToggle}
-                        defaultToggled={this.state.stripedRows}
-                    />
-                    <Toggle
-                        name="showRowHover"
-                        label="Show Row Hover"
-                        onToggle={this.handleToggle}
-                        defaultToggled={this.state.showRowHover}
-                    />
-                    <h3 style={styles.propToggleHeader}>Multiple Properties</h3>
-                    <Toggle
-                        name="showCheckboxes"
-                        label="Show Checkboxes"
-                        onToggle={this.handleToggle}
-                        defaultToggled={this.state.showCheckboxes}
-                    />
-                </div>
             </div>
         );
     }
